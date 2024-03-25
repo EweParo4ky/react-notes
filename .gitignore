@@ -1,0 +1,11 @@
+# dependencies
+/node_modules
+/src/toDoNotes.txt
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build

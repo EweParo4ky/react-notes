@@ -1,0 +1,66 @@
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+   background-color: #c3efd4;
+}
+
+.container {
+  width: 800px;
+  background-color: #304E50;
+  border: none;
+  border-radius: 1rem;
+  color: #c6d8be;
+}
+
+.cardContainer {
+  display: flex;
+  min-height: 200px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.btn {
+  color: #c6d8be;;
+  background-color: #304E50;
+  border-color: #c6d8be;
+  border-radius: 1rem;
+}
+.nav {
+  display: flex;
+  color: #c6d8be;
+  font-weight: bold;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.noteCard {
+  display: flex;
+  color: #1B4422;
+  background-color: #c3efd4;
+  margin: 1rem;
+  min-width: 200px;
+  max-width: auto;
+  border-radius: 1rem;
+  border-color: white;
+}
+.inputText {
+  color: #1B4422;
+  margin-bottom: 1rem;
+  background-color: #c3efd4;
+  border-color: white;
+  border-radius: 1rem;
+}
+.inputContainer {
+  padding: 1rem;
+}
