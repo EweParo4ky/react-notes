@@ -12,6 +12,12 @@
       
      * Mac/linux
      * Node v17.6 or higher
+     
+ ### Install
+    $ git clone git@github.com:EweParo4ky/react-notes.git
+    $ cd react-notes
+    $ To install dependencies: npm ci
+    $ To run on localhost: make start
 
   ## Tools
 [![React][React-badge]][React-url]
