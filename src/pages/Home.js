@@ -8,7 +8,8 @@ import { NotesList } from '../components/NotesList';
 import { Loader } from '../components/Loader';
 
 export const Home = () => {
-  const dataUrl = process.env.REACT_APP_DB_URL;
+  // const dataUrl = process.env.REACT_APP_DB_URL;
+  const dataUrl = 'https://notes-2a82e-default-rtdb.firebaseio.com';
   const status = useSelector(state => state.notes.status);
   const dispatch = useDispatch();
   useEffect(() => {
