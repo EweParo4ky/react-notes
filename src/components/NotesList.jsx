@@ -4,19 +4,29 @@ import { actions as notesActions } from '../slices/notesSlice';
 import { actions as alertActions } from '../slices/alertSlice';
 import Card from 'react-bootstrap/Card';
 import { Button } from 'react-bootstrap';
+import axios from 'axios';
 
 export const NotesList = () => {
   const dispatch = useDispatch();
-  const handleDelete = id => {
-    dispatch(notesActions.deleteNote(id));
-    dispatch(
-      alertActions.showAlert({ type: 'warning', text: 'Note was deleted!' })
-    );
+  const dataUrl = process.env.REACT_APP_DB_URL;
+  const handleDelete = async id => {
+    await axios.delete(`${dataUrl}/notes/${id}.json`).then(() => {
+      dispatch(notesActions.deleteNote(id));
+      dispatch(
+        alertActions.showAlert({
+          type: 'warning',
+          text: 'Note was deleted!',
+          alertTime: 3000,
+        })
+      );
+    });
   };
+
   const notes = useSelector(state => state.notes.notes);
+  const status = useSelector(state => state.notes.status);
   const visibleLengthOfNote = 14;
 
-  if (notes.length === 0) {
+  if (notes.length === 0 && status !== 'loading') {
     return <div>Hello! Please, add your first note...</div>;
   } else
     return (

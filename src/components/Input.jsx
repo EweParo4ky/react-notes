@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { actions as notesActions } from '../slices/notesSlice';
 import { actions as alertActions } from '../slices/alertSlice';
 import { Form, Button } from 'react-bootstrap';
-const { v4 } = require('uuid');
 
 const Input = () => {
   const [title, setTitle] = useState('');
@@ -16,6 +16,8 @@ const Input = () => {
   const inputRef = useRef();
   const notes = useSelector(state => state.notes.notes);
 
+  const dataUrl = 'https://notes-2a82e-default-rtdb.firebaseio.com';
+
   useEffect(() => {
     inputRef.current.focus();
     dispatch(alertActions.hideAlert());
@@ -26,26 +28,31 @@ const Input = () => {
     setNoteText(currentNote.noteText);
   }, [currentNote.noteText, currentNote.title]);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if (currentNote.id === null) {
       const newNote = {
         title,
         noteText,
-        id: v4(),
       };
-
-      dispatch(notesActions.addNote(newNote));
-      setTitle('');
-      setNoteText('');
+      await axios.post(`${dataUrl}/notes.json`, newNote).then(() => {
+        dispatch(notesActions.addNote(newNote));
+        setTitle('');
+        setNoteText('');
+      });
     } else {
       const updatedNote = { ...currentNote, title, noteText };
-      dispatch(notesActions.editNote(updatedNote));
+      await axios
+        .put(`${dataUrl}/notes/${currentNote.id}.json`, updatedNote)
+        .then(() => {
+          dispatch(notesActions.editNote(updatedNote));
+        });
     }
     dispatch(
       alertActions.showAlert({
         type: 'success',
         text: 'Note successfully added',
+        alertTime: 3000,
       })
     );
     dispatch(notesActions.clearNote());

@@ -7,12 +7,16 @@ const initialState = {
     id: null,
     noteText: '',
   },
+  status: 'waiting',
 };
 
 const notesSlice = createSlice({
   name: 'notes',
   initialState,
   reducers: {
+    setNotes: (state, { payload }) => {
+      state.notes = payload;
+    },
     addNote: (state, { payload }) => {
       state.notes.unshift(payload);
     },
@@ -35,6 +39,9 @@ const notesSlice = createSlice({
         id: null,
         noteText: '',
       };
+    },
+    changeStatus: (state, { payload }) => {
+      state.status = payload;
     },
   },
 });

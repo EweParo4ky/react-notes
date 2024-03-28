@@ -7,14 +7,18 @@ export const Alert = () => {
   const alert = useSelector(state => state.alert);
 
   useEffect(() => {
-    const timeMS = 3000;
-    const timer = setTimeout(() => dispatch(alertActions.hideAlert()), timeMS);
-    return () => {
-      clearTimeout(timer);
-    };
+    const timeMS = alert.alertTime;
+    if (timeMS !== null) {
+      const timer = setTimeout(
+        () => dispatch(alertActions.hideAlert()),
+        timeMS
+      );
+      return () => {
+        clearTimeout(timer);
+      };
+    }
   });
 
-  console.log('alert', alert);
   if (!alert.type) {
     return null;
   }
