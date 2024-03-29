@@ -20,7 +20,7 @@ body {
 
 .cardContainer {
   display: flex;
-  min-height: 200px;
+  // min-height: 200px;
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -49,7 +49,7 @@ code {
   color: #1B4422;
   background-color: #c3efd4;
   margin: 1rem;
-  min-width: 200px;
+  min-width: 100px;
   max-width: auto;
   border-radius: 1rem;
   border-color: white;
