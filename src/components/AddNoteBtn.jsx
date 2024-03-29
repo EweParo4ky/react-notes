@@ -11,7 +11,10 @@ export const AddNoteBtn = () => {
     navigate('/edit');
   };
   return (
-    <div className='d-flex justify-content-end'>
+    <div
+      className='d-flex justify-content-end'
+      style={{ position: 'sticky', bottom: 0 }}
+    >
       <button className='btn btn-lg m-2' type='submit' onClick={handleClick}>
         {/* &#43; &#925;ote */}
         <i className='fa-solid fa-pencil'></i>
