@@ -31,7 +31,7 @@ export const NotesList = () => {
     return <div>Hello! Please, add your first note...</div>;
   } else
     return (
-      <div className='cardContainer'>
+      <div className='cardContainer overflow-auto'>
         {notes.map((note, index) => (
           <Card className='noteCard text-center' key={note.id}>
             <Card.Header

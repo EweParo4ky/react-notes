@@ -20,6 +20,7 @@ body {
 
 .cardContainer {
   display: flex;
+  max-height: 400px;
   // min-height: 200px;
   justify-content: center;
   flex-wrap: wrap;
