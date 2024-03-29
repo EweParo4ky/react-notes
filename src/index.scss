@@ -12,6 +12,7 @@ body {
 
 .container {
   width: auto;
+  height: auto;
   background-color: #304E50;
   border: none;
   border-radius: 1rem;
@@ -20,7 +21,6 @@ body {
 
 .cardContainer {
   display: flex;
-  max-height: 400px;
   // min-height: 200px;
   justify-content: center;
   flex-wrap: wrap;
