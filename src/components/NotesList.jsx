@@ -8,7 +8,8 @@ import axios from 'axios';
 
 export const NotesList = () => {
   const dispatch = useDispatch();
-  const dataUrl = process.env.REACT_APP_DB_URL;
+  const dataUrl = 'https://notes-2a82e-default-rtdb.firebaseio.com';
+  // const dataUrl = process.env.REACT_APP_DB_URL;
   const handleDelete = async id => {
     await axios.delete(`${dataUrl}/notes/${id}.json`).then(() => {
       dispatch(notesActions.deleteNote(id));
