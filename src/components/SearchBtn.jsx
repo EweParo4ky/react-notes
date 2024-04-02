@@ -1,14 +1,12 @@
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { actions as notesActions } from '../slices/notesSlice';
+import { actions as modalActions } from '../slices/modalSlice';
 
-export const AddNoteBtn = () => {
+export const SearchBtn = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleClick = () => {
-    dispatch(notesActions.clearNote());
-    navigate('/edit');
+    dispatch(modalActions.openModal());
+    console.log('click');
   };
   return (
     <div
@@ -16,7 +14,7 @@ export const AddNoteBtn = () => {
       style={{ position: 'sticky', bottom: 0 }}
     >
       <button className='btn btn-lg m-2' type='submit' onClick={handleClick}>
-        <i className='fa-solid fa-pencil'></i>
+        <i className='fa-solid fa-magnifying-glass'></i>
       </button>
     </div>
   );

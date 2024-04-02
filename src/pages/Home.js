@@ -3,14 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { actions as notesActions } from '../slices/notesSlice';
 import { actions as alertActions } from '../slices/alertSlice';
-import { AddNoteBtn } from '../components/AddNoteBtn';
 import { NotesList } from '../components/NotesList';
 import { Loader } from '../components/Loader';
+import Footer from '../components/Footer';
+import Search from '../components/Search';
 
 export const Home = () => {
   // const dataUrl = process.env.REACT_APP_DB_URL;
   const dataUrl = 'https://notes-2a82e-default-rtdb.firebaseio.com';
   const status = useSelector(state => state.notes.status);
+  const notes = useSelector(state => state.notes.notes);
+  const isOpened = useSelector(state => state.modal.isOpened);
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchData = async () => {
@@ -45,8 +48,9 @@ export const Home = () => {
   return (
     <Fragment>
       {status === 'loading' && <Loader />}
-      <NotesList />
-      <AddNoteBtn />
+      {isOpened && <Search notes={notes} />}
+      <NotesList notes={notes} />
+      <Footer />
     </Fragment>
   );
 };

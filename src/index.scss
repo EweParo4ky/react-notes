@@ -66,7 +66,8 @@ code {
   padding: 1rem;
 }
 
-$base-color: limegreen;
+// $base-color: limegreen;
+$base-color: #1B4422;;
 
 #loader {
   border-radius: 50%;
@@ -84,4 +85,12 @@ $base-color: limegreen;
   50% { border-radius: 0; }
   100% { transform: rotate(360deg);
    }
+}
+
+.modalBody {
+  background-color: #304E50;
+}
+.modalCard {
+  color: #1B4422;
+  background-color: #c3efd4;
 }

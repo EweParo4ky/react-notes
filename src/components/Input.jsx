@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { actions as notesActions } from '../slices/notesSlice';
 import { actions as alertActions } from '../slices/alertSlice';
+import { actions as modalActions } from '../slices/modalSlice';
 import { Form, Button } from 'react-bootstrap';
 
 const Input = () => {
@@ -17,6 +18,7 @@ const Input = () => {
   const notes = useSelector(state => state.notes.notes);
 
   const dataUrl = 'https://notes-2a82e-default-rtdb.firebaseio.com';
+  // const dataUrl = process.env.REACT_APP_DB_URL;
 
   useEffect(() => {
     inputRef.current.focus();
@@ -64,11 +66,40 @@ const Input = () => {
     navigate('/');
   };
 
+  const handleDelete = async id => {
+    await axios.delete(`${dataUrl}/notes/${id}.json`).then(() => {
+      dispatch(notesActions.deleteNote(id));
+      dispatch(
+        alertActions.showAlert({
+          type: 'warning',
+          text: 'Note was deleted!',
+          alertTime: 3000,
+        })
+      );
+      navigate('/');
+      dispatch(modalActions.closeModal());
+    });
+  };
+
   return (
     <div className='inputText'>
       <Form onSubmit={e => handleSubmit(e)}>
         <Form.Group className='mb-3 p-2'>
-          <Form.Label>Title</Form.Label>
+          <Form.Label className='d-flex justify-content-between'>
+            <div>Title</div>
+            <div>
+              <Button
+                type='button'
+                className='btn btn-sm'
+                aria-label='Close'
+                variant='secondary'
+                onClick={() => handleDelete(currentNote.id)}
+                style={{ marginLeft: '1rem' }}
+              >
+                <i className='fa-regular fa-trash-can fa-lg'></i>
+              </Button>
+            </div>
+          </Form.Label>
           <Form.Control
             type='text'
             ref={inputRef}

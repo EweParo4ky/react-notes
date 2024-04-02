@@ -1,34 +1,24 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { actions as notesActions } from '../slices/notesSlice';
-import { actions as alertActions } from '../slices/alertSlice';
 import Card from 'react-bootstrap/Card';
-import { Button } from 'react-bootstrap';
-import axios from 'axios';
 
-export const NotesList = () => {
+export const NotesList = ({ notes }) => {
   const dispatch = useDispatch();
-  const dataUrl = 'https://notes-2a82e-default-rtdb.firebaseio.com';
-  // const dataUrl = process.env.REACT_APP_DB_URL;
-  const handleDelete = async id => {
-    await axios.delete(`${dataUrl}/notes/${id}.json`).then(() => {
-      dispatch(notesActions.deleteNote(id));
-      dispatch(
-        alertActions.showAlert({
-          type: 'warning',
-          text: 'Note was deleted!',
-          alertTime: 3000,
-        })
-      );
-    });
-  };
-
-  const notes = useSelector(state => state.notes.notes);
+  console.log('notes in notesList', notes);
+  // const notes = useSelector(state => state.notes.notes);
   const status = useSelector(state => state.notes.status);
   const visibleLengthOfNote = 14;
 
   if (notes.length === 0 && status !== 'loading') {
-    return <div>Hello! Please, add your first note...</div>;
+    return (
+      <div className='d-flex flex-column align-items-center'>
+        <div className='mb-1'>
+          <i className='fa-2xl fa-solid fa-note-sticky'></i>
+        </div>
+        <div>No Notes...</div>
+      </div>
+    );
   } else
     return (
       <div className='cardContainer overflow-auto'>
@@ -49,18 +39,6 @@ export const NotesList = () => {
                     ? `${note.title.slice(0, visibleLengthOfNote)}...`
                     : note.title}
                 </strong>
-              </div>
-              <div>
-                <Button
-                  type='button'
-                  className='btn btn-sm'
-                  aria-label='Close'
-                  variant='secondary'
-                  onClick={() => handleDelete(note.id)}
-                  style={{ marginLeft: '1rem' }}
-                >
-                  &#10007;
-                </Button>
               </div>
             </Card.Header>
             <NavLink
@@ -83,8 +61,9 @@ export const NotesList = () => {
               style={{ border: 'none', justifyContent: 'space-between' }}
             >
               <small>
-                <span>{`№_${index + 1} `}</span>
+                <span className='me-3 ms-0'>{`№_${index + 1} `}</span>
               </small>
+
               <small>{new Date().toLocaleDateString()}</small>
             </Card.Footer>
           </Card>
